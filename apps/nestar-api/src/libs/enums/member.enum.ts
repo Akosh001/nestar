@@ -6,7 +6,7 @@ export enum MemberType {
 	ADMIN = 'ADMIN',
 }
 registerEnumType(MemberType, {
-	name: 'MemberType,',
+	name: 'MemberType',
 });
 
 export enum MemberStatus {
@@ -15,7 +15,7 @@ export enum MemberStatus {
 	DELETE = 'DELETE',
 }
 registerEnumType(MemberStatus, {
-	name: 'MemberStatus,',
+	name: 'MemberStatus',
 });
 
 export enum MemberAuthType {
@@ -24,5 +24,5 @@ export enum MemberAuthType {
 	TELEGRAM = 'TELEGRAM',
 }
 registerEnumType(MemberAuthType, {
-	name: 'MemberAuthType,',
+	name: 'MemberAuthType',
 });
