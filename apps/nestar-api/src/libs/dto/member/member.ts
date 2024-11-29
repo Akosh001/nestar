@@ -55,7 +55,7 @@ export class Member {
 	memberViews: number;
 
 	@Field(() => Int)
-	memberCommnets: number;
+	memberComments: number;
 
 	@Field(() => Int)
 	memberRank: number;
@@ -67,10 +67,10 @@ export class Member {
 	memberBlocks: number;
 
 	@Field(() => Date)
-	createdAt?: Date;
+	createdAt: Date;
 
 	@Field(() => Date)
-	updatedAt?: Date;
+	updatedAt: Date;
 
 	@Field(() => Date, { nullable: true })
 	deletedAt?: Date;
