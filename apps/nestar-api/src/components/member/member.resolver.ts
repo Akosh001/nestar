@@ -9,19 +9,27 @@ export class MemberResolver {
 	constructor(private readonly memberService: MemberService) {}
 
 	@Mutation(() => Member)
-	@UsePipes(ValidationPipe)
 	public async signup(@Args('input') input: MemberInput): Promise<Member> {
-		console.log('inputim', input);
-		console.log('Mutation: signup');
-		return this.memberService.signup(input);
+		try {
+			console.log('input', input);
+			console.log('Mutation: signup');
+			return this.memberService.signup(input);
+		} catch (err) {
+			console.log('Error, signup', err);
+			throw new InternalServerErrorException(err);
+		}
 	}
 
 	@Mutation(() => Member)
-	@UsePipes(ValidationPipe)
 	public async login(@Args('input') input: LoginInput): Promise<Member> {
-		console.log('inputim', input);
-		console.log('Mutation: login');
-		return this.memberService.login(input);
+		try {
+			console.log('input', input);
+			console.log('Mutation: login');
+			return this.memberService.login(input);
+		} catch (err) {
+			console.log('Error, login', err);
+			throw new InternalServerErrorException(err);
+		}
 	}
 
 	@Mutation(() => String)
