@@ -17,15 +17,15 @@ import { T } from './libs/types/common';
 			playground: true,
 			uploads: false,
 			autoSchemaFile: true,
-			formatError: (error: T) => {
-				const graphQLFormattedError = {
-					code: error?.extensions.code,
-					message:
-						error?.extensions?.exception?.response?.message || error?.extensions?.response?.message || error?.message,
-				};
-				console.log('GRAPHQL GLOBAL ERROR:', graphQLFormattedError);
-				return graphQLFormattedError;
-			},
+			// formatError: (error: T) => {
+			// 	const graphQLFormattedError = {
+			// 		code: error?.extensions.code,
+			// 		message:
+			// 			error?.extensions?.exception?.response?.message || error?.extensions?.response?.message || error?.message,
+			// 	};
+			// 	console.log('GRAPHQL GLOBAL ERROR:', graphQLFormattedError);
+			// 	return graphQLFormattedError;
+			// },
 		}),
 		ComponentsModule,
 		DatabaseModule,
