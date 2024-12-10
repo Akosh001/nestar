@@ -12,7 +12,7 @@ async function bootstrap() {
 	app.enableCors({ origin: true, credentials: true });
 
 	app.use(graphqlUploadExpress({ MaxFileSize: 15000000, maxFiles: 10 }));
-	app.use('/upload', express.static('./uploads'));
+	app.use('/uploads', express.static('./uploads'));
 
 	await app.listen(process.env.PORT_API ?? 3000);
 }

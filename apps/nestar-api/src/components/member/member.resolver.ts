@@ -36,7 +36,7 @@ export class MemberResolver {
 
 	@Roles(MemberType.USER, MemberType.AGENT)
 	@UseGuards(RolesGuard)
-	@Query(() => String)
+	@Mutation(() => String)
 	public async checkAuthRoles(@AuthMember() authMember: Member): Promise<String> {
 		console.log('Query: checkAuthRoles ');
 		return await `Hi ${authMember.memberNick}, you are ${authMember.memberType} and your id ${authMember._id}`;
@@ -144,6 +144,7 @@ export class MemberResolver {
 				if (!validMime) throw new Error(Message.PROVIDE_ALLOWED_FORMAT);
 
 				const imageName = getSerialForImage(filename);
+
 				const url = `uploads/${target}/${imageName}`;
 				const stream = createReadStream();
 
@@ -157,7 +158,7 @@ export class MemberResolver {
 
 				uploadedImages[index] = url;
 			} catch (err) {
-				console.log('Error, file missing!');
+				console.log('Error, file missing!', err);
 			}
 		});
 
