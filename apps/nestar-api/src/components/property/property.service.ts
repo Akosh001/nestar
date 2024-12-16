@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model, ObjectId } from 'mongoose';
 import {
 	AgentPropertiesInquiry,
-	ALlPropertiesInq,
+	ALlPropertiesInquiry,
 	PropertiesInquiry,
 	PropertyInput,
 } from '../../libs/dto/property/property.input';
@@ -173,7 +173,7 @@ export class PropertyService {
 		return result[0];
 	}
 
-	public async getAllPropertiesByAdmin(memberId: ObjectId, input: ALlPropertiesInq): Promise<Properties> {
+	public async getAllPropertiesByAdmin(memberId: ObjectId, input: ALlPropertiesInquiry): Promise<Properties> {
 		const { propertyStatus, propertyLocationList } = input.search;
 
 		const match: T = {};
