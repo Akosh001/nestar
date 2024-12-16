@@ -3,7 +3,7 @@ import { PropertyService } from './property.service';
 import { Properties, Property } from '../../libs/dto/property/property';
 import {
 	AgentPropertiesInquiry,
-	ALlPropertiesInquiry,
+	AllPropertiesInquiry,
 	PropertiesInquiry,
 	PropertyInput,
 } from '../../libs/dto/property/property.input';
@@ -84,7 +84,7 @@ export class PropertyResolver {
 	@UseGuards(RolesGuard)
 	@Query((returns) => Properties)
 	public async getAllPropertiesByAdmin(
-		@Args('input') input: ALlPropertiesInquiry,
+		@Args('input') input: AllPropertiesInquiry,
 		@AuthMember('_id') memberId: ObjectId,
 	): Promise<Properties> {
 		console.log('Mutation: getAllPropertiesByAdmin');

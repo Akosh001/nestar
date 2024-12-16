@@ -210,7 +210,7 @@ class ALPISearch {
 }
 
 @InputType()
-export class ALlPropertiesInquiry {
+export class AllPropertiesInquiry {
 	@IsNotEmpty()
 	@Min(1)
 	@Field(() => Int)
