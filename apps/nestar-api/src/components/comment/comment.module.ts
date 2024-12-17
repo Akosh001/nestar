@@ -7,6 +7,7 @@ import { CommentResolver } from './comment.resolver';
 import { CommentService } from './comment.service';
 import CommentSchema from '../../schemas/Comment.model';
 import { PropertyModule } from '../property/property.module';
+import { BoardArticleModule } from '../board-article/board-article.module';
 
 @Module({
 	imports: [
@@ -15,6 +16,7 @@ import { PropertyModule } from '../property/property.module';
 		ViewModule,
 		MemberModule,
 		PropertyModule,
+		BoardArticleModule,
 	],
 	providers: [CommentResolver, CommentService],
 	exports: [CommentService],
