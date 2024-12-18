@@ -33,7 +33,7 @@ export class PropertyService {
 			return result;
 		} catch (err) {
 			console.log('Error, Server.model:', err.message);
-			throw new BadRequestException(Message.CREATE_FOUND);
+			throw new BadRequestException(Message.CREATE_FAILED);
 		}
 	}
 
@@ -44,7 +44,7 @@ export class PropertyService {
 		};
 
 		const targetProperty: Property = await this.propertyModel.findOne(search).lean<Property>().exec();
-		if (!targetProperty) throw new InternalServerErrorException(Message.NO_DATA_FAILED);
+		if (!targetProperty) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
 
 		if (memberId) {
 			const viewInput = { memberId: memberId, viewRefId: propertyId, viewGroup: ViewGroup.PROPERTY };
@@ -109,7 +109,7 @@ export class PropertyService {
 				},
 			])
 			.exec();
-		if (!result.length) throw new InternalServerErrorException(Message.NO_DATA_FAILED);
+		if (!result.length) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
 		return result[0];
 	}
 
@@ -169,7 +169,7 @@ export class PropertyService {
 				},
 			])
 			.exec();
-		if (!result.length) throw new InternalServerErrorException(Message.NO_DATA_FAILED);
+		if (!result.length) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
 		return result[0];
 	}
 
@@ -199,7 +199,7 @@ export class PropertyService {
 				},
 			])
 			.exec();
-		if (!result.length) throw new InternalServerErrorException(Message.NO_DATA_FAILED);
+		if (!result.length) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
 		return result[0];
 	}
 

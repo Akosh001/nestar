@@ -30,7 +30,7 @@ export class CommentService {
 			result = await this.commentModel.create(input);
 		} catch (err) {
 			console.log('Error, Service.model', err.message);
-			throw new BadRequestException(Message.CREATE_FOUND);
+			throw new BadRequestException(Message.CREATE_FAILED);
 		}
 
 		switch (input.commentGroup) {
@@ -56,7 +56,7 @@ export class CommentService {
 				});
 				break;
 		}
-		if (!result) throw new InternalServerErrorException(Message.CREATE_FOUND);
+		if (!result) throw new InternalServerErrorException(Message.CREATE_FAILED);
 		return result;
 	}
 
@@ -97,7 +97,7 @@ export class CommentService {
 				},
 			])
 			.exec();
-		if (!result.length) throw new InternalServerErrorException(Message.NO_DATA_FAILED);
+		if (!result.length) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
 		return result[0];
 	}
 

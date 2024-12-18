@@ -2,8 +2,8 @@ import { registerEnumType } from '@nestjs/graphql';
 
 export enum Message {
 	SOMETHING_WENT_WRONG = 'Something went wrong!',
-	NO_DATA_FAILED = 'No data is found!',
-	CREATE_FOUND = 'Create is failed!',
+	NO_DATA_FOUND = 'No data is found!',
+	CREATE_FAILED = 'Create is failed!',
 	UPDATE_FAILED = 'Update is failed!',
 	REMOVE_FAILED = 'Remove failed!',
 	UPLOAD_FAILED = 'Upload failed!',

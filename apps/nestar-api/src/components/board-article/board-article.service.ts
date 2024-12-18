@@ -35,7 +35,7 @@ export class BoardArticleService {
 			return result;
 		} catch (err) {
 			console.log('Error, Service.model', err.message);
-			throw new BadRequestException(Message.CREATE_FOUND);
+			throw new BadRequestException(Message.CREATE_FAILED);
 		}
 	}
 
@@ -46,7 +46,7 @@ export class BoardArticleService {
 		};
 
 		const targetBoardArticle: BoardArticle = await this.boardArticleModel.findOne(search).lean<BoardArticle>().exec();
-		if (!targetBoardArticle) throw new InternalServerErrorException(Message.NO_DATA_FAILED);
+		if (!targetBoardArticle) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
 
 		if (memberId) {
 			const viewInput = { memberId: memberId, viewRefId: articleId, viewGroup: ViewGroup.ARTICLE };
@@ -111,7 +111,7 @@ export class BoardArticleService {
 				},
 			])
 			.exec();
-		if (!result.length) throw new InternalServerErrorException(Message.NO_DATA_FAILED);
+		if (!result.length) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
 		return result[0];
 	}
 
@@ -140,7 +140,7 @@ export class BoardArticleService {
 				},
 			])
 			.exec();
-		if (!result.length) throw new InternalServerErrorException(Message.NO_DATA_FAILED);
+		if (!result.length) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
 		return result[0];
 	}
 

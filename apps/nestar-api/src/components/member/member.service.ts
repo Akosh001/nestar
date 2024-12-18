@@ -10,13 +10,17 @@ import { MemberUpdate } from '../../libs/dto/member/member.update';
 import { StatisticModifier, T } from '../../libs/types/common';
 import { ViewService } from '../view/view.service';
 import { ViewGroup } from '../../libs/enums/view.enum';
+import { LikeInput } from '../../libs/dto/like/like.input';
+import { LikeGroup } from '../../libs/enums/like.enum';
+import { LikeService } from '../like/like.service';
 
 @Injectable()
 export class MemberService {
 	constructor(
 		@InjectModel('Member') private readonly memberModel: Model<Member>,
-		private authService: AuthService,
-		private viewService: ViewService,
+		private readonly authService: AuthService,
+		private readonly viewService: ViewService,
+		private readonly likeService: LikeService,
 	) {}
 
 	public async signup(input: MemberInput): Promise<Member> {
@@ -68,7 +72,7 @@ export class MemberService {
 			},
 		};
 		const targetMember = await this.memberModel.findOne(search).lean<Member>().exec();
-		if (!targetMember) throw new InternalServerErrorException(Message.NO_DATA_FAILED);
+		if (!targetMember) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
 
 		if (memberId) {
 			const viewInput = { memberId: memberId, viewRefId: targetId, viewGroup: ViewGroup.MEMBER };
@@ -102,9 +106,25 @@ export class MemberService {
 				},
 			])
 			.exec();
-		if (!result) throw new InternalServerErrorException(Message.NO_DATA_FAILED);
+		if (!result) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
 
 		return result[0];
+	}
+
+	public async likeTargetMember(memberId: ObjectId, likeRefId: ObjectId): Promise<Member> {
+		const target: Member = await this.memberModel.findOne({ _id: likeRefId, memberStatus: MemberStatus.ACTIVE }).exec();
+		if (!target) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
+
+		const input: LikeInput = {
+			memberId: memberId,
+			likeRefId: likeRefId,
+			likeGroup: LikeGroup.MEMBER,
+		};
+		//Like Tog
+		const modifier: number = await this.likeService.toggleLike(input);
+		const result = await this.memberStatusEditor({ _id: likeRefId, targetKey: 'memberLikes', modifier: modifier });
+		if (!result) throw new InternalServerErrorException(Message.SOMETHING_WENT_WRONG);
+		return result;
 	}
 
 	public async getallMembersByAdmin(input: MembersInquiry): Promise<Members> {
@@ -129,7 +149,7 @@ export class MemberService {
 				},
 			])
 			.exec();
-		if (!result) throw new InternalServerErrorException(Message.NO_DATA_FAILED);
+		if (!result) throw new InternalServerErrorException(Message.NO_DATA_FOUND);
 
 		return result[0];
 	}
