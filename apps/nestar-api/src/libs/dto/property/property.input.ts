@@ -74,8 +74,8 @@ export class PricesRange {
 	@Field(() => Int)
 	start: number;
 
-	@Field(() => Date)
-	edit: number;
+	@Field(() => Int)
+	end: number;
 }
 
 @InputType()
@@ -84,7 +84,7 @@ export class PeriodsRange {
 	start: Date;
 
 	@Field(() => Date)
-	edit: Date;
+	end: Date;
 }
 
 @InputType()
@@ -92,8 +92,8 @@ export class SquaresRange {
 	@Field(() => Int)
 	start: number;
 
-	@Field(() => Date)
-	edit: number;
+	@Field(() => Int)
+	end: number;
 }
 
 @InputType()
@@ -206,7 +206,7 @@ class ALPISearch {
 
 	@IsOptional()
 	@Field(() => [PropertyLocation], { nullable: true })
-	propertyLocationList?: PropertyStatus[];
+	propertyLocationList?: PropertyLocation[];
 }
 
 @InputType()
